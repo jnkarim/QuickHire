@@ -3,6 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
 import JobsPage from "./pages/JobsPage";
+import JobDetailPage from "./pages/JobDetailPage";
 
 
 function ScrollToTop() {
@@ -18,6 +19,7 @@ export default function App() {
           <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/jobs" element={<JobsPage />} />
+            <Route path="/jobs/:id" element={<JobDetailPage />} />
             <Route
               path="*"
               element={
