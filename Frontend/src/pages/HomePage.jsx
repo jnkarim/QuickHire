@@ -267,12 +267,6 @@ export default function HomePage() {
                 Start posting<br />jobs today
               </h2>
               <p className="text-blue-200 text-sm mb-6">Start posting jobs for only $10.</p>
-              <Link
-                to="/admin/new"
-                className="inline-block border-2 border-white text-white px-7 py-3 font-semibold hover:bg-white hover:text-primary transition-colors text-sm"
-              >
-                Sign Up For Free
-              </Link>
             </div>
           </div>
 
