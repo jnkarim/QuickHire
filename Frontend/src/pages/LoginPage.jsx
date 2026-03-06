@@ -148,7 +148,7 @@ export default function LoginPage() {
                   name="email"
                   value={form.email}
                   onChange={handleChange}
-                  placeholder="john@example.com"
+                  placeholder="julker@gmail.com"
                   className={`w-full pl-10 pr-4 py-2.5 rounded-xl border bg-white text-sm text-gray-900 outline-none transition placeholder:text-gray-300 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500 ${errors.email ? "border-rose-400 focus:ring-rose-400/20 focus:border-rose-400" : "border-gray-200"}`}
                 />
               </div>
