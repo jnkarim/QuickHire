@@ -9,6 +9,7 @@ import JobDetailPage from "./pages/JobDetailPage";
 import LoginPage from "./pages/LoginPage";
 import RegisterPage from "./pages/RegisterPage";
 import AuthCallback from "./pages/AuthCallback";
+import BrowseCompaniesPage from "./pages/BrowseCompanies";
 
 export default function App() {
   return (
@@ -26,6 +27,7 @@ export default function App() {
               <main className="flex-1">
                 <Routes>
                   <Route path="/" element={<HomePage />} />
+                  <Route path="/companies" element={<BrowseCompaniesPage />} />
                   <Route path="/jobs" element={<JobsPage />} />
                   <Route path="/jobs/:id" element={
                     <ProtectedRoute>

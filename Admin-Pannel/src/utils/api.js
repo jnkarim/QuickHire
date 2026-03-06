@@ -29,4 +29,9 @@ export const updateApplicationStatus = (id, status) =>
   api.patch(`/applications/${id}/status`, { status });
 export const deleteApplication = (id) => api.delete(`/applications/${id}`);
 
+
+export const uploadCompanyLogo = (formData) =>
+  api.post("/jobs/upload-logo", formData, {
+    headers: { "Content-Type": "multipart/form-data" },
+  });
 export default api;

@@ -2,11 +2,6 @@ import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
-/**
- * This page lives at /auth/callback
- * Google → backend → redirect here with ?token=JWT
- * We store the token via AuthContext then redirect to /jobs
- */
 export default function AuthCallback() {
   const [searchParams] = useSearchParams();
   const { loginWithToken } = useAuth();
@@ -23,7 +18,6 @@ export default function AuthCallback() {
       return;
     }
 
-    // Hand the token to AuthContext — it should store it and fetch /me
     loginWithToken(token)
       .then(() => navigate("/jobs", { replace: true }))
       .catch(() => {

@@ -14,6 +14,11 @@ const jobSchema = new mongoose.Schema(
       trim: true,
       maxlength: [100, "Company name cannot exceed 100 characters"],
     },
+    logoUrl: {
+      type: String,
+      trim: true,
+      default: null,
+    },
     location: {
       type: String,
       required: [true, "location is required"],

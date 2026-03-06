@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useParams, Link, useNavigate } from "react-router-dom";
 import { getJobById, submitApplication } from "../utils/api";
+import CompanyLogo from "../components/CompanyLogo";
 
 const TAG_COLORS = {
   "Full Time": "bg-green-50 text-green-700 border-green-200",
@@ -8,17 +9,6 @@ const TAG_COLORS = {
   Remote: "bg-orange-50 text-orange-600 border-orange-200",
   Internship: "bg-purple-50 text-purple-700 border-purple-200",
 };
-
-function CompanyAvatar({ company, size = "lg" }) {
-  const colors = ["bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500", "bg-pink-500", "bg-teal-500"];
-  const idx = company.charCodeAt(0) % colors.length;
-  const sizeClass = size === "lg" ? "w-20 h-20 text-3xl" : "w-12 h-12 text-lg";
-  return (
-    <div className={`${sizeClass} ${colors[idx]} rounded-full flex items-center justify-center flex-shrink-0`}>
-      <span className="text-white font-bold">{company[0].toUpperCase()}</span>
-    </div>
-  );
-}
 
 const INITIAL_FORM = { name: "", email: "", resumeLink: "", coverNote: "" };
 
@@ -65,19 +55,13 @@ export default function JobDetailPage() {
   const handleChange = (e) => {
     const { name, value } = e.target;
     setForm((prev) => ({ ...prev, [name]: value }));
-    if (formErrors[name]) {
-      setFormErrors((prev) => ({ ...prev, [name]: "" }));
-    }
+    if (formErrors[name]) setFormErrors((prev) => ({ ...prev, [name]: "" }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validate();
-    if (Object.keys(errors).length) {
-      setFormErrors(errors);
-      return;
-    }
-
+    if (Object.keys(errors).length) { setFormErrors(errors); return; }
     setSubmitting(true);
     setSubmitError("");
     try {
@@ -126,12 +110,13 @@ export default function JobDetailPage() {
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
           <div className="lg:col-span-2 space-y-6">
+
             {/* Job Header Card */}
             <div className="bg-white border border-gray-200 p-6">
               <div className="flex items-start gap-4">
-                <CompanyAvatar company={job.company} />
+                {/* Replaced CompanyAvatar — shows real logo or colored initial fallback */}
+                <CompanyLogo company={job.company} logoUrl={job.logoUrl} size="lg" />
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
                     {job.type && (
@@ -180,10 +165,7 @@ export default function JobDetailPage() {
                     Thank you for applying to <strong>{job.title}</strong> at {job.company}.
                   </p>
                   <div className="flex gap-3 justify-center">
-                    <button
-                      onClick={() => setSubmitted(false)}
-                      className="btn-outline text-sm"
-                    >
+                    <button onClick={() => setSubmitted(false)} className="btn-outline text-sm">
                       Apply Again
                     </button>
                     <Link to="/jobs" className="btn-primary text-sm">
@@ -203,51 +185,30 @@ export default function JobDetailPage() {
                     <label className="block text-sm font-semibold text-dark mb-1.5">
                       Full Name <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="text"
-                      name="name"
-                      value={form.name}
-                      onChange={handleChange}
+                    <input type="text" name="name" value={form.name} onChange={handleChange}
                       placeholder="John Doe"
-                      className={`input-field ${formErrors.name ? "border-red-400" : ""}`}
-                    />
-                    {formErrors.name && (
-                      <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>
-                    )}
+                      className={`input-field ${formErrors.name ? "border-red-400" : ""}`} />
+                    {formErrors.name && <p className="text-red-500 text-xs mt-1">{formErrors.name}</p>}
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-dark mb-1.5">
                       Email Address <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="email"
-                      name="email"
-                      value={form.email}
-                      onChange={handleChange}
+                    <input type="email" name="email" value={form.email} onChange={handleChange}
                       placeholder="john@example.com"
-                      className={`input-field ${formErrors.email ? "border-red-400" : ""}`}
-                    />
-                    {formErrors.email && (
-                      <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>
-                    )}
+                      className={`input-field ${formErrors.email ? "border-red-400" : ""}`} />
+                    {formErrors.email && <p className="text-red-500 text-xs mt-1">{formErrors.email}</p>}
                   </div>
 
                   <div>
                     <label className="block text-sm font-semibold text-dark mb-1.5">
                       Resume Link <span className="text-red-500">*</span>
                     </label>
-                    <input
-                      type="url"
-                      name="resumeLink"
-                      value={form.resumeLink}
-                      onChange={handleChange}
+                    <input type="url" name="resumeLink" value={form.resumeLink} onChange={handleChange}
                       placeholder="https://drive.google.com/your-resume"
-                      className={`input-field ${formErrors.resumeLink ? "border-red-400" : ""}`}
-                    />
-                    {formErrors.resumeLink && (
-                      <p className="text-red-500 text-xs mt-1">{formErrors.resumeLink}</p>
-                    )}
+                      className={`input-field ${formErrors.resumeLink ? "border-red-400" : ""}`} />
+                    {formErrors.resumeLink && <p className="text-red-500 text-xs mt-1">{formErrors.resumeLink}</p>}
                   </div>
 
                   <div>
@@ -255,29 +216,21 @@ export default function JobDetailPage() {
                       Cover Note{" "}
                       <span className="text-gray-400 font-normal text-xs">(optional, max 1000 chars)</span>
                     </label>
-                    <textarea
-                      name="coverNote"
-                      value={form.coverNote}
-                      onChange={handleChange}
-                      rows={4}
-                      placeholder="Tell us why you're a great fit for this role..."
-                      className={`input-field resize-none ${formErrors.coverNote ? "border-red-400" : ""}`}
-                    />
+                    <textarea name="coverNote" value={form.coverNote} onChange={handleChange}
+                      rows={4} placeholder="Tell us why you're a great fit for this role..."
+                      className={`input-field resize-none ${formErrors.coverNote ? "border-red-400" : ""}`} />
                     <div className="flex justify-between mt-1">
-                      {formErrors.coverNote ? (
-                        <p className="text-red-500 text-xs">{formErrors.coverNote}</p>
-                      ) : <span />}
+                      {formErrors.coverNote
+                        ? <p className="text-red-500 text-xs">{formErrors.coverNote}</p>
+                        : <span />}
                       <span className={`text-xs ${form.coverNote.length > 900 ? "text-orange-500" : "text-gray-400"}`}>
                         {form.coverNote.length}/1000
                       </span>
                     </div>
                   </div>
 
-                  <button
-                    type="submit"
-                    disabled={submitting}
-                    className="btn-primary w-full text-sm flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
-                  >
+                  <button type="submit" disabled={submitting}
+                    className="btn-primary w-full text-sm flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed">
                     {submitting ? (
                       <>
                         <svg className="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
@@ -286,18 +239,15 @@ export default function JobDetailPage() {
                         </svg>
                         Submitting...
                       </>
-                    ) : (
-                      "Submit Application"
-                    )}
+                    ) : "Submit Application"}
                   </button>
                 </form>
               )}
             </div>
           </div>
 
-
+          {/* Sidebar */}
           <div className="space-y-4">
-            {/* Quick Info */}
             <div className="bg-white border border-gray-200 p-5 sticky top-20">
               <h3 className="font-bold text-dark text-sm mb-4">Job Overview</h3>
               <div className="space-y-3 text-sm">
@@ -354,16 +304,10 @@ export default function JobDetailPage() {
                 </div>
               </div>
 
-              <a
-                href="#apply-form"
-                className="btn-primary w-full text-sm text-center block mt-6"
-              >
+              <a href="#apply-form" className="btn-primary w-full text-sm text-center block mt-6">
                 Apply Now
               </a>
-              <Link
-                to="/jobs"
-                className="btn-outline w-full text-sm text-center block mt-2"
-              >
+              <Link to="/jobs" className="btn-outline w-full text-sm text-center block mt-2">
                 ← Back to Jobs
               </Link>
             </div>

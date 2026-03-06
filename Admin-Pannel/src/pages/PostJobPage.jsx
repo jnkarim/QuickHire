@@ -1,18 +1,20 @@
+// admin/src/pages/PostJobPage.jsx
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createJob } from "../utils/api";
+import LogoUploader from "../components/LogoUploader";
 
 const CATEGORIES = [
   "Junior Software Engineer", "Senior Software Engineer", "UI/UX Designer",
   "Machine Learning Engineer", "Human Resources", "DevOps Engineer",
 ];
 const TYPES = ["Full Time", "Part Time", "Remote", "Internship"];
-const EMPTY = { title: "", company: "", location: "", category: "", type: "", description: "", isActive: true };
+const EMPTY = { title: "", company: "", location: "", category: "", type: "", description: "", isActive: true, logoUrl: "" };
 
 export default function PostJobPage() {
   const navigate = useNavigate();
-  const [form, setForm] = useState(EMPTY);
-  const [errors, setErrors] = useState({});
+  const [form, setForm]           = useState(EMPTY);
+  const [errors, setErrors]       = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [serverError, setServerError] = useState("");
 
@@ -40,7 +42,9 @@ export default function PostJobPage() {
     setSubmitting(true);
     setServerError("");
     try {
-      await createJob(form);
+      const payload = { ...form };
+      if (!payload.logoUrl) delete payload.logoUrl; // don't send empty string
+      await createJob(payload);
       navigate("/jobs");
     } catch (err) {
       const msg = err.response?.data?.message;
@@ -63,6 +67,13 @@ export default function PostJobPage() {
         )}
 
         <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+
+          {/* Company logo — uploaded first so admin associates it with the company field below */}
+          <LogoUploader
+            value={form.logoUrl}
+            onChange={(url) => setForm((p) => ({ ...p, logoUrl: url }))}
+          />
+
           <div className="grid grid-cols-2 gap-4">
             <div>
               <label className="block text-sm font-semibold text-gray-700 mb-1.5">
