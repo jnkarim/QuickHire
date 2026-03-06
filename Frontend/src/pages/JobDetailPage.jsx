@@ -115,7 +115,6 @@ export default function JobDetailPage() {
             {/* Job Header Card */}
             <div className="bg-white border border-gray-200 p-6">
               <div className="flex items-start gap-4">
-                {/* Replaced CompanyAvatar — shows real logo or colored initial fallback */}
                 <CompanyLogo company={job.company} logoUrl={job.logoUrl} size="lg" />
                 <div className="flex-1">
                   <div className="flex flex-wrap items-center gap-2 mb-1">
