@@ -10,14 +10,25 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+const allowedOrigins = (process.env.FRONTEND_URL || "")
+  .split(",")
+  .map(url => url.trim())
+  .filter(Boolean);
+
 app.use(
   cors({
-    origin: process.env.FRONTEND_URL || "*",
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error(`CORS blocked: ${origin}`));
+      }
+    },
     methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
-  }),
+    credentials: true,
+  })
 );
-
 app.use(passport.initialize());
 
 // Routes

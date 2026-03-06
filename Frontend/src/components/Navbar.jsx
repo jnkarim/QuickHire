@@ -29,7 +29,7 @@ export default function Navbar() {
             <Link to="/jobs" className={`text-sm font-medium hover:text-primary transition-colors ${location.pathname.startsWith("/jobs") ? "text-primary" : "text-gray-600"}`}>
               Find Jobs
             </Link>
-            <Link to="/jobs" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">
+            <Link to="/companies" className="text-sm font-medium text-gray-600 hover:text-primary transition-colors">
               Browse Companies
             </Link>
           </div>

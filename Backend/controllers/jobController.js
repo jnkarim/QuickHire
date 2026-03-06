@@ -42,11 +42,7 @@ export const getAllJobs = async (req, res) => {
     const skip = (pageNum - 1) * limitNum;
 
     const [jobs, total] = await Promise.all([
-      Job.find(filter)
-        .sort(sort)
-        .skip(skip)
-        .limit(limitNum)
-        .lean(),
+      Job.find(filter).sort(sort).skip(skip).limit(limitNum).lean(),
       Job.countDocuments(filter),
     ]);
 
@@ -165,6 +161,23 @@ export const getJobApplications = async (req, res) => {
     if (error.name === "CastError") {
       return errorResponse(res, "Invalid job ID", 400);
     }
+    return errorResponse(res, error.message, 500);
+  }
+};
+
+// POST /api/jobs/upload-logo
+
+export const uploadLogo = async (req, res) => {
+  try {
+    if (!req.file) {
+      return errorResponse(res, "No file uploaded", 400);
+    }
+    return successResponse(
+      res,
+      { logoUrl: req.file.path },
+      "Logo uploaded successfully",
+    );
+  } catch (error) {
     return errorResponse(res, error.message, 500);
   }
 };

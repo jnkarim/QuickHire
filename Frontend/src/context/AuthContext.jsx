@@ -23,7 +23,7 @@ export function AuthProvider({ children }) {
     localStorage.setItem("qh_token", token);
     try {
       const res = await getMe();
-      console.log("getMe response:", res.data); // ← temporary debug log
+      console.log("getMe response:", res.data);
       const userData = res.data.data ?? res.data.user ?? res.data;
       setUser(userData);
     } catch (err) {
