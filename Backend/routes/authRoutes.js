@@ -9,7 +9,6 @@ import {
 } from "../controllers/authController.js";
 import { protect } from "../middleware/authMiddleware.js";
 
-
 const router = Router();
 
 // routes
@@ -32,7 +31,7 @@ router.get(
   "/google/callback",
   passport.authenticate("google", {
     session: false,
-    failureRedirect: `${process.env.FRONTEND_URL || "http://localhost:5173"}/login?error=google_failed`,
+    failureRedirect: `${process.env.FRONTEND_CLIENT_URL || "http://localhost:5173"}/login?error=google_failed`,
   }),
   googleCallback,
 );

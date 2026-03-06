@@ -52,6 +52,10 @@ app.use(globalErrorHandler);
 const PORT = process.env.PORT || 5000;
 const MONGO_URI = process.env.MONGO_URI;
 
+app.get("/", (req, res) => {
+  res.send("QuickHire API is running...");
+});
+
 if (!MONGO_URI) {
   console.error("Error: MONGO_URI is not defined in Environment Variables.");
 } else {

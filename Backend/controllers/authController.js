@@ -133,10 +133,13 @@ export const googleCallback = (req, res) => {
     const user = req.user;
     const token = signToken(user._id, user.role);
 
-    const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
+    
+    const frontendURL =
+      process.env.FRONTEND_CLIENT_URL || "http://localhost:5173";
     res.redirect(`${frontendURL}/auth/callback?token=${token}`);
   } catch (error) {
-    const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
+    const frontendURL =
+      process.env.FRONTEND_CLIENT_URL || "http://localhost:5173";
     res.redirect(`${frontendURL}/login?error=google_failed`);
   }
 };
