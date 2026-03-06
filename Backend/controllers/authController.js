@@ -87,7 +87,6 @@ export const adminLogin = async (req, res) => {
       return errorResponse(res, "Email and password are required", 400);
     }
 
-    // Check against env credentials
     if (
       email !== process.env.ADMIN_EMAIL ||
       password !== process.env.ADMIN_PASSWORD
@@ -103,10 +102,7 @@ export const adminLogin = async (req, res) => {
 
     return successResponse(
       res,
-      {
-        token,
-        user: { id: "admin", name: "Admin", email, role: "admin" },
-      },
+      { token, user: { id: "admin", name: "Admin", email, role: "admin" } },
       "Admin login successful",
     );
   } catch (error) {
@@ -124,8 +120,23 @@ export const getMe = async (req, res) => {
       name: user.name,
       email: user.email,
       role: user.role,
+      avatar: user.avatar,
     });
   } catch (error) {
     return errorResponse(res, error.message, 500);
+  }
+};
+
+// GET /api/auth/google/callback
+export const googleCallback = (req, res) => {
+  try {
+    const user = req.user;
+    const token = signToken(user._id, user.role);
+
+    const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
+    res.redirect(`${frontendURL}/auth/callback?token=${token}`);
+  } catch (error) {
+    const frontendURL = process.env.FRONTEND_URL || "http://localhost:5173";
+    res.redirect(`${frontendURL}/login?error=google_failed`);
   }
 };

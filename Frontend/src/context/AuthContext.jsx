@@ -19,6 +19,20 @@ export function AuthProvider({ children }) {
     }
   }, []);
 
+  const loginWithToken = async (token) => {
+    localStorage.setItem("qh_token", token);
+    try {
+      const res = await getMe();
+      console.log("getMe response:", res.data); // ← temporary debug log
+      const userData = res.data.data ?? res.data.user ?? res.data;
+      setUser(userData);
+    } catch (err) {
+      console.error("loginWithToken failed:", err.response?.data || err.message);
+      localStorage.removeItem("qh_token");
+      throw err;
+    }
+  };
+
   const login = async (email, password) => {
     const res = await loginUser({ email, password });
     const { token, user } = res.data.data;
@@ -41,7 +55,7 @@ export function AuthProvider({ children }) {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, logout, loginWithToken }}>
       {children}
     </AuthContext.Provider>
   );
