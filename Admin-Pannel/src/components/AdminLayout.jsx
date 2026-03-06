@@ -64,7 +64,7 @@ function SidebarContent({ onClose }) {
             <p className="text-gray-400 text-xs">Admin Panel</p>
           </div>
         </div>
-        {/* Close button — mobile only */}
+        {/* Close button mobile only */}
         {onClose && (
           <button
             onClick={onClose}
@@ -87,11 +87,10 @@ function SidebarContent({ onClose }) {
               key={item.path}
               to={item.path}
               onClick={onClose}
-              className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors rounded-lg ${
-                active
+              className={`flex items-center gap-3 px-3 py-2.5 text-sm font-medium transition-colors rounded-lg ${active
                   ? "bg-primary text-white"
                   : "text-gray-400 hover:bg-gray-800 hover:text-white"
-              }`}
+                }`}
             >
               {item.icon}
               {item.label}
@@ -131,12 +130,10 @@ export default function AdminLayout({ children }) {
   return (
     <div className="flex min-h-screen bg-gray-100">
 
-      {/* ── Desktop sidebar (always visible on lg+) ── */}
       <aside className="hidden lg:flex w-64 bg-gray-900 flex-col flex-shrink-0">
         <SidebarContent onClose={null} />
       </aside>
 
-      {/* ── Mobile: backdrop ── */}
       {sidebarOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-30 lg:hidden"
@@ -144,7 +141,7 @@ export default function AdminLayout({ children }) {
         />
       )}
 
-      {/* ── Mobile: slide-out drawer ── */}
+
       <aside
         className={`fixed top-0 left-0 h-full w-64 bg-gray-900 z-40 flex flex-col
           transform transition-transform duration-300 ease-in-out lg:hidden
@@ -153,7 +150,7 @@ export default function AdminLayout({ children }) {
         <SidebarContent onClose={() => setSidebarOpen(false)} />
       </aside>
 
-      {/* ── Main content ── */}
+      {/* Main content*/}
       <div className="flex-1 flex flex-col min-w-0 overflow-hidden">
 
         {/* Mobile top bar */}
