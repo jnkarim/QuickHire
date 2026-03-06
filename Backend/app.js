@@ -1,19 +1,24 @@
 import express from "express";
 import cors from "cors";
+import passport from "./config/googleStrategy.js";
 import jobRoutes from "./routes/jobRoutes.js";
 import applicationRoutes from "./routes/applicationRoutes.js";
-import authRoutes from "./routes/authRoutes.js"
+import authRoutes from "./routes/authRoutes.js";
 import { notFound, globalErrorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
 
-app.use(express.json());                    
-app.use(express.urlencoded({ extended: true }));  
-app.use(cors({
-  origin: process.env.FRONTEND_URL || "*",
-  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"],
-}));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(
+  cors({
+    origin: process.env.FRONTEND_URL || "*",
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  }),
+);
+
+app.use(passport.initialize());
 
 // Routes
 app.use("/api/auth", authRoutes);

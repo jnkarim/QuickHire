@@ -2,6 +2,17 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
+const GOOGLE_AUTH_URL = `${import.meta.env.VITE_API_URL}/auth/google`;
+
+const GoogleIcon = () => (
+  <svg width="18" height="18" viewBox="0 0 48 48">
+    <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"/>
+    <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"/>
+    <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"/>
+    <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"/>
+  </svg>
+);
+
 export default function RegisterPage() {
   const navigate = useNavigate();
   const { register } = useAuth();
@@ -61,10 +72,10 @@ export default function RegisterPage() {
   })();
 
   const pwMeta = [
-    { color: "bg-rose-400",   label: "Weak" },
-    { color: "bg-amber-400",  label: "Fair" },
-    { color: "bg-blue-500",   label: "Good" },
-    { color: "bg-emerald-500",label: "Strong" },
+    { color: "bg-rose-400",    label: "Weak" },
+    { color: "bg-amber-400",   label: "Fair" },
+    { color: "bg-blue-500",    label: "Good" },
+    { color: "bg-emerald-500", label: "Strong" },
   ];
 
   const inputBase = "w-full pl-10 pr-10 py-2.5 rounded-xl border bg-white text-sm text-gray-900 outline-none transition placeholder:text-gray-300 focus:ring-2 focus:ring-indigo-500/20 focus:border-indigo-500";
@@ -86,7 +97,6 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        {/* Logo */}
         <div className="flex items-center gap-2.5 relative z-10">
           <div className="w-10 h-10 bg-white rounded-xl flex items-center justify-center">
             <span className="font-extrabold text-indigo-600 text-lg">Q</span>
@@ -94,7 +104,6 @@ export default function RegisterPage() {
           <span className="text-white font-extrabold text-xl">QuickHire</span>
         </div>
 
-        {/* Tagline + perks */}
         <div className="relative z-10">
           <h2 className="text-4xl font-extrabold text-white leading-tight mb-4">
             Join <span className="text-amber-400">thousands</span> of job seekers today.
@@ -119,10 +128,9 @@ export default function RegisterPage() {
           </div>
         </div>
 
-        {/* Stats */}
         <div className="flex gap-4 relative z-10">
           {[
-            { num: "5K+", label: "Active Jobs" },
+            { num: "5K+",  label: "Active Jobs" },
             { num: "100+", label: "Companies" },
             { num: "Free", label: "Always" },
           ].map((s) => (
@@ -138,7 +146,6 @@ export default function RegisterPage() {
       <div className="flex-1 flex items-center justify-center px-6 py-10 overflow-y-auto">
         <div className="w-full max-w-md">
 
-          {/* Mobile logo */}
           <Link to="/" className="lg:hidden flex items-center gap-2.5 mb-8">
             <div className="w-9 h-9 bg-indigo-600 rounded-xl flex items-center justify-center">
               <span className="text-white font-extrabold text-base">Q</span>
@@ -147,9 +154,24 @@ export default function RegisterPage() {
           </Link>
 
           <h1 className="text-3xl font-extrabold text-gray-900 mb-1.5">Create Your Account</h1>
-          <p className="text-sm text-gray-500 mb-8">Free forever. No payment required.</p>
+          <p className="text-sm text-gray-500 mb-6">Free forever. No payment required.</p>
 
-          {/* Server error */}
+          {/* ── Google button ── */}
+          <a
+            href={GOOGLE_AUTH_URL}
+            className="w-full flex items-center justify-center gap-3 py-2.5 border border-gray-200 rounded-xl bg-white hover:bg-gray-50 text-sm font-semibold text-gray-700 transition shadow-sm hover:shadow"
+          >
+            <GoogleIcon />
+            Sign up with Google
+          </a>
+
+          {/* ── Divider ── */}
+          <div className="flex items-center gap-3 my-5">
+            <div className="flex-1 h-px bg-gray-200" />
+            <span className="text-xs text-gray-400 font-medium">or sign up with email</span>
+            <div className="flex-1 h-px bg-gray-200" />
+          </div>
+
           {serverError && (
             <div className="flex items-start gap-2.5 bg-rose-50 border border-rose-200 text-rose-700 text-sm rounded-xl px-4 py-3 mb-5">
               <svg className="mt-0.5 shrink-0" width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
@@ -219,7 +241,7 @@ export default function RegisterPage() {
               )}
             </div>
 
-            {/* Password + Confirm — side by side */}
+            {/* Password + Confirm side by side */}
             <div className="grid grid-cols-2 gap-4">
 
               {/* Password */}
@@ -242,12 +264,8 @@ export default function RegisterPage() {
                     placeholder="Min. 6 chars"
                     className={`${inputBase} ${errors.password ? inputError : inputNormal}`}
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword((v) => !v)}
-                    tabIndex={-1}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
-                  >
+                  <button type="button" onClick={() => setShowPassword((v) => !v)} tabIndex={-1}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition">
                     {showPassword ? (
                       <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19" /><line x1="1" y1="1" x2="23" y2="23" />
@@ -265,15 +283,11 @@ export default function RegisterPage() {
                     {errors.password}
                   </p>
                 )}
-                {/* Strength meter */}
                 {form.password && !errors.password && (
                   <div className="mt-2">
                     <div className="flex gap-1 mb-1">
                       {[1, 2, 3, 4].map((n) => (
-                        <div
-                          key={n}
-                          className={`h-1 flex-1 rounded-full transition-all ${pwStrength >= n ? pwMeta[pwStrength - 1].color : "bg-gray-200"}`}
-                        />
+                        <div key={n} className={`h-1 flex-1 rounded-full transition-all ${pwStrength >= n ? pwMeta[pwStrength - 1].color : "bg-gray-200"}`} />
                       ))}
                     </div>
                     <span className={`text-xs font-semibold ${["", "text-rose-400", "text-amber-500", "text-blue-500", "text-emerald-500"][pwStrength]}`}>
@@ -302,12 +316,8 @@ export default function RegisterPage() {
                     placeholder="Repeat"
                     className={`${inputBase} ${errors.confirmPassword ? inputError : inputNormal}`}
                   />
-                  <button
-                    type="button"
-                    onClick={() => setShowConfirm((v) => !v)}
-                    tabIndex={-1}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition"
-                  >
+                  <button type="button" onClick={() => setShowConfirm((v) => !v)} tabIndex={-1}
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600 transition">
                     {showConfirm ? (
                       <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
                         <path d="M17.94 17.94A10.07 10.07 0 0112 20c-7 0-11-8-11-8a18.45 18.45 0 015.06-5.94M9.9 4.24A9.12 9.12 0 0112 4c7 0 11 8 11 8a18.5 18.5 0 01-2.16 3.19" /><line x1="1" y1="1" x2="23" y2="23" />
@@ -362,9 +372,7 @@ export default function RegisterPage() {
 
           <p className="text-center text-sm text-gray-500 mt-6">
             Already have an account?{" "}
-            <Link to="/login" className="text-indigo-600 font-bold hover:underline">
-              Log in
-            </Link>
+            <Link to="/login" className="text-indigo-600 font-bold hover:underline">Log in</Link>
           </p>
 
         </div>
