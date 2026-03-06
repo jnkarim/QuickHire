@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import HomePage from "./pages/HomePage";
+import JobsPage from "./pages/JobsPage";
 
 
 function ScrollToTop() {
@@ -16,6 +17,7 @@ export default function App() {
         <main className="flex-1">
           <Routes>
             <Route path="/" element={<HomePage />} />
+            <Route path="/jobs" element={<JobsPage />} />
             <Route
               path="*"
               element={
