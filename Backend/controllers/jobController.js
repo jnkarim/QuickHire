@@ -46,7 +46,6 @@ export const getAllJobs = async (req, res) => {
         .sort(sort)
         .skip(skip)
         .limit(limitNum)
-        .populate("applicationCount")
         .lean(),
       Job.countDocuments(filter),
     ]);
@@ -60,9 +59,7 @@ export const getAllJobs = async (req, res) => {
 // GET /api/jobs/:id
 export const getJobById = async (req, res) => {
   try {
-    const job = await Job.findById(req.params.id)
-      .populate("applicationCount")
-      .lean();
+    const job = await Job.findById(req.params.id).lean();
 
     if (!job) {
       return errorResponse(res, "Job not found", 404);

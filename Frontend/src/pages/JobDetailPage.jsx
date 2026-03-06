@@ -10,7 +10,7 @@ const TAG_COLORS = {
 };
 
 function CompanyAvatar({ company, size = "lg" }) {
-  const colors = ["bg-blue-500","bg-green-500","bg-purple-500","bg-orange-500","bg-pink-500","bg-teal-500"];
+  const colors = ["bg-blue-500", "bg-green-500", "bg-purple-500", "bg-orange-500", "bg-pink-500", "bg-teal-500"];
   const idx = company.charCodeAt(0) % colors.length;
   const sizeClass = size === "lg" ? "w-20 h-20 text-3xl" : "w-12 h-12 text-lg";
   return (
@@ -126,7 +126,7 @@ export default function JobDetailPage() {
         </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          {/* ── Main Content ── */}
+
           <div className="lg:col-span-2 space-y-6">
             {/* Job Header Card */}
             <div className="bg-white border border-gray-200 p-6">
@@ -295,7 +295,7 @@ export default function JobDetailPage() {
             </div>
           </div>
 
-          {/* ── Sidebar ── */}
+
           <div className="space-y-4">
             {/* Quick Info */}
             <div className="bg-white border border-gray-200 p-5 sticky top-20">
