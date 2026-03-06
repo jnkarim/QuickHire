@@ -6,16 +6,17 @@ import {
   updateApplicationStatus,
   deleteApplication,
 } from "../controllers/applicationController.js";
+import { protect, adminOnly } from "../middleware/authMiddleware.js";
 
 const router = Router();
 
-// Public
-router.post("/", submitApplication);
+// Requires login to apply
+router.post("/", protect, submitApplication);
 
-// Admin
-router.get("/", getAllApplications);
-router.get("/:id", getApplicationById);
-router.patch("/:id/status", updateApplicationStatus);
-router.delete("/:id", deleteApplication);
+// Admin only
+router.get("/", protect, adminOnly, getAllApplications);
+router.get("/:id", protect, adminOnly, getApplicationById);
+router.patch("/:id/status", protect, adminOnly, updateApplicationStatus);
+router.delete("/:id", protect, adminOnly, deleteApplication);
 
 export default router;
