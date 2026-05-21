@@ -75,27 +75,35 @@ export default function HomePage() {
 
   return (
     <div>
-      <section className="bg-gray-50 relative overflow-hidden">
+      <section className="relative overflow-hidden bg-[linear-gradient(135deg,#fbfdff_0%,#f7fbff_48%,#f4f7ff_100%)]">
+        <div className="absolute -top-28 -right-24 h-72 w-72 rounded-full bg-blue-100/60 blur-3xl" />
+        <div className="absolute top-40 left-1/2 h-80 w-80 rounded-full bg-indigo-100/50 blur-3xl" />
+        <div className="absolute bottom-16 left-12 h-52 w-52 rounded-full bg-emerald-100/40 blur-3xl" />
 
         {/* Hero content */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 flex flex-col lg:flex-row items-center gap-8">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24 flex flex-col lg:flex-row items-center gap-10 lg:gap-14 relative">
 
           {/* Left: copy + search */}
           <div className="flex-1 z-10">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-dark leading-tight">
+            <div className="inline-flex items-center gap-2 rounded-full border border-blue-100 bg-white/70 px-4 py-2 text-xs font-semibold text-primary shadow-sm backdrop-blur">
+              <span className="h-2 w-2 rounded-full bg-emerald-400" />
+              Calmly find your next opportunity
+            </div>
+
+            <h1 className="mt-7 text-4xl sm:text-5xl lg:text-6xl font-extrabold text-dark leading-tight tracking-tight">
               Discover <br />
               more than{" "}
-              <span className="text-accent relative inline-block">
+              <span className="relative inline-block bg-gradient-to-r from-indigo-500 via-primary to-accent bg-clip-text text-transparent">
                 5000+ Jobs
                 <svg
-                  className="absolute -bottom-2 left-0 w-full"
+                  className="absolute -bottom-2 left-0 w-full opacity-80"
                   height="8"
                   viewBox="0 0 200 8"
                   fill="none"
                 >
                   <path
-                    d="M0 6 Q50 2 100 6 Q150 10 200 6"
-                    stroke="#26A4FF"
+                    d="M2 6 Q50 2 100 5 Q150 8 198 4"
+                    stroke="#60A5FA"
                     strokeWidth="2.5"
                     fill="none"
                     strokeLinecap="round"
@@ -103,14 +111,16 @@ export default function HomePage() {
                 </svg>
               </span>
             </h1>
-            <p className="mt-6 text-gray-500 text-base max-w-md">
-              Great platform for the job seeker that searching for new career
-              heights and passionate about startups.
+            <p className="mt-6 text-slate-500 text-base leading-7 max-w-md">
+              A simple, peaceful way to discover roles, compare companies, and
+              move through your job search with confidence.
             </p>
-            <div className="mt-8">
-              <SearchBar onSearch={handleSearch} />
-              <p className="mt-3 text-sm text-gray-500">
-                <span className="font-medium">Popular:</span>{" "}
+            <div className="mt-8 max-w-2xl">
+              <div className="rounded-2xl bg-white/85 shadow-[0_22px_60px_rgba(70,64,222,0.10)] ring-1 ring-slate-200/70 backdrop-blur">
+                <SearchBar onSearch={handleSearch} />
+              </div>
+              <p className="mt-4 text-sm text-slate-500">
+                <span className="font-medium text-slate-600">Popular:</span>{" "}
                 {["UI Designer", "UX Researcher", "Android", "Admin"].map(
                   (tag, i, arr) => (
                     <span key={tag}>
@@ -128,106 +138,133 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex-1 hidden lg:block relative h-[430px]">
-            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-[2rem] border border-blue-100 shadow-sm" />
-            <div className="absolute -top-6 right-8 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
-            <div className="absolute bottom-8 left-6 w-32 h-32 bg-indigo-200/30 rounded-full blur-3xl" />
+          {/* Right: soothing abstract product visual */}
+          <div className="flex-1 hidden lg:block relative h-[500px]">
+            <div className="absolute inset-0 rounded-[3rem] bg-gradient-to-br from-white/80 via-blue-50/70 to-indigo-50/80 border border-white shadow-[0_30px_100px_rgba(70,64,222,0.11)] backdrop-blur" />
+            <div className="absolute left-10 top-16 h-56 w-56 rounded-full bg-gradient-to-br from-blue-200/45 to-indigo-200/25 blur-2xl" />
+            <div className="absolute right-8 bottom-12 h-64 w-64 rounded-full bg-gradient-to-br from-emerald-100/70 to-sky-100/60 blur-2xl" />
+            <div className="absolute left-16 bottom-20 h-3 w-3 rounded-full bg-emerald-300" />
+            <div className="absolute right-24 top-12 h-4 w-4 rounded-full bg-indigo-300" />
+            <div className="absolute right-12 top-40 h-2 w-2 rounded-full bg-sky-300" />
 
-            <div className="relative z-10 h-full p-8 flex items-center justify-center">
-              <div className="w-full max-w-md space-y-5">
-                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-5">
-                  <div className="flex items-center justify-between mb-5">
-                    <div>
-                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Talent Pipeline</p>
-                      <h3 className="text-xl font-bold text-dark mt-1">Hiring Dashboard</h3>
-                    </div>
-                    <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
-                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 17v-6a2 2 0 012-2h8M9 17H5a2 2 0 01-2-2V7a2 2 0 012-2h4m0 12h10a2 2 0 002-2v-3" />
-                      </svg>
-                    </div>
-                  </div>
+            <svg className="absolute inset-0 h-full w-full opacity-60" viewBox="0 0 560 500" fill="none">
+              <path d="M95 253C138 115 300 70 424 137C526 193 548 337 458 410C350 497 171 439 95 253Z" fill="url(#heroBlob)" />
+              <path d="M92 160C174 80 330 55 456 136" stroke="#C7D2FE" strokeWidth="1.5" strokeDasharray="8 10" />
+              <path d="M146 430C236 474 381 457 480 374" stroke="#BFDBFE" strokeWidth="1.5" strokeDasharray="8 10" />
+              <defs>
+                <linearGradient id="heroBlob" x1="116" y1="91" x2="487" y2="433" gradientUnits="userSpaceOnUse">
+                  <stop stopColor="#EEF2FF" />
+                  <stop offset="0.52" stopColor="#EFF6FF" />
+                  <stop offset="1" stopColor="#ECFDF5" />
+                </linearGradient>
+              </defs>
+            </svg>
 
-                  <div className="grid grid-cols-3 gap-3 mb-5">
-                    {[
-                      ["5k+", "Jobs"],
-                      ["320", "Companies"],
-                      ["24h", "Fast apply"],
-                    ].map(([value, label]) => (
-                      <div key={label} className="rounded-xl bg-gray-50 p-3 text-center">
-                        <p className="text-lg font-extrabold text-dark">{value}</p>
-                        <p className="text-[11px] text-gray-500 mt-1">{label}</p>
-                      </div>
-                    ))}
-                  </div>
+            <div className="absolute left-10 top-16 w-40 rounded-3xl border border-white/80 bg-white/80 p-5 shadow-[0_20px_50px_rgba(37,50,75,0.10)] backdrop-blur">
+              <div className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl bg-emerald-50 text-emerald-500">
+                <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M9 6V5a3 3 0 116 0v1m-9 4h12M5 8h14l-1 11H6L5 8z" />
+                </svg>
+              </div>
+              <p className="text-sm font-bold text-dark">Top Match</p>
+              <p className="mt-1 text-xs text-slate-500">95% match for</p>
+              <p className="mt-1 text-xs font-semibold text-emerald-500">Product Designer</p>
+            </div>
 
-                  <div className="space-y-3">
-                    {[
-                      ["Senior Product Designer", "Remote • Full Time"],
-                      ["Frontend Engineer", "Dhaka • Hybrid"],
-                      ["Growth Marketer", "On-site • Part Time"],
-                    ].map(([title, meta]) => (
-                      <div key={title} className="flex items-center gap-3 rounded-xl border border-gray-100 p-3">
-                        <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-primary font-bold">
-                          {title.charAt(0)}
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="text-sm font-bold text-dark truncate">{title}</p>
-                          <p className="text-xs text-gray-500 mt-0.5">{meta}</p>
-                        </div>
-                        <span className="text-[10px] font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full">Open</span>
-                      </div>
-                    ))}
-                  </div>
+            <div className="absolute left-1/2 top-1/2 w-[330px] -translate-x-1/2 -translate-y-1/2 rounded-[2rem] border border-white/90 bg-white/85 p-8 text-center shadow-[0_28px_80px_rgba(70,64,222,0.12)] backdrop-blur">
+              <div className="mx-auto mb-6 flex h-14 w-14 items-center justify-center rounded-full bg-indigo-50 text-primary">
+                <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M7 17l4-4 3 3 5-7M7 17H4m3 0v-3" />
+                </svg>
+              </div>
+              <p className="text-lg font-bold text-dark">Your job journey starts here</p>
+              <p className="mt-3 text-sm leading-6 text-slate-500">
+                We connect talent with opportunities that drive growth and impact.
+              </p>
+              <div className="mt-7 rounded-2xl bg-gradient-to-r from-indigo-50 to-blue-50 p-5">
+                <p className="text-3xl font-extrabold text-primary">5,000+</p>
+                <p className="mt-1 text-xs text-slate-500">Active job opportunities</p>
+              </div>
+            </div>
+
+            <div className="absolute right-8 top-24 w-44 rounded-3xl border border-white/80 bg-white/80 p-5 shadow-[0_20px_50px_rgba(37,50,75,0.10)] backdrop-blur">
+              <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-indigo-50 text-primary">
+                <svg className="h-7 w-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M4 21V7a2 2 0 012-2h12a2 2 0 012 2v14M9 9h1m4 0h1M9 13h1m4 0h1M8 21v-4h8v4" />
+                </svg>
+              </div>
+              <p className="text-2xl font-extrabold text-dark">320+</p>
+              <p className="mt-1 text-sm text-slate-500">Companies hiring</p>
+              <Link to="/companies" className="mt-4 inline-block text-sm font-semibold text-primary">
+                Explore now →
+              </Link>
+            </div>
+
+            <div className="absolute right-6 bottom-20 w-64 rounded-3xl border border-white/80 bg-white/85 p-5 shadow-[0_24px_60px_rgba(37,50,75,0.11)] backdrop-blur">
+              <p className="mb-4 text-sm font-bold text-dark">Application Tracker</p>
+              {[
+                ["UI/UX Designer", "Interview", "bg-emerald-50 text-emerald-600"],
+                ["Frontend Engineer", "Review", "bg-blue-50 text-blue-600"],
+                ["Product Designer", "Applied", "bg-amber-50 text-amber-600"],
+              ].map(([role, status, color]) => (
+                <div key={role} className="mb-3 flex items-center justify-between gap-3 last:mb-0">
+                  <span className="text-xs font-medium text-slate-600">{role}</span>
+                  <span className={`rounded-full px-3 py-1 text-[10px] font-semibold ${color}`}>{status}</span>
                 </div>
+              ))}
+            </div>
 
-                <div className="ml-14 bg-dark text-white rounded-2xl shadow-lg p-5 flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
-                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 13l4 4L19 7" />
-                    </svg>
-                  </div>
-                  <div>
-                    <p className="font-bold">Trusted by top teams</p>
-                    <p className="text-sm text-white/60">Find, apply, and track jobs faster.</p>
-                  </div>
-                </div>
+            <div className="absolute left-20 bottom-12 w-52 rounded-3xl border border-white/80 bg-white/80 p-5 shadow-[0_20px_50px_rgba(37,50,75,0.10)] backdrop-blur">
+              <div className="mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-blue-50 text-accent">
+                <svg className="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.7} d="M17 20h5v-2a4 4 0 00-5-3.87M9 20H2v-2a4 4 0 015-3.87M12 12a4 4 0 100-8 4 4 0 000 8z" />
+                </svg>
+              </div>
+              <p className="text-sm font-bold text-dark">Growing community</p>
+              <p className="mt-2 text-xs leading-5 text-slate-500">Join thousands of job seekers building their dream careers.</p>
+              <div className="mt-4 flex -space-x-2">
+                {["A", "M", "R", "S"].map((letter) => (
+                  <span key={letter} className="flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-slate-100 text-[10px] font-bold text-slate-500">
+                    {letter}
+                  </span>
+                ))}
+                <span className="flex h-7 w-9 items-center justify-center rounded-full border-2 border-white bg-primary text-[10px] font-bold text-white">+2K</span>
               </div>
             </div>
           </div>
         </div>
 
         {/*Company logos*/}
-        <div className="border-t border-gray-200 bg-white w-full">
+        <div className="border-t border-blue-100/70 bg-white/70 backdrop-blur w-full">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-            <p className="text-sm text-gray-400 mb-5">Companies we helped grow</p>
-            <div className="flex justify-between items-center">
+            <p className="text-sm text-slate-400 mb-5">Companies we helped grow</p>
+            <div className="flex flex-wrap gap-8 sm:gap-10 justify-between items-center">
 
               {/* Vodafone */}
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-slate-400 hover:text-slate-500 transition-colors">
                 <SiVodafone className="w-5 h-5" />
                 <span className="text-base font-normal tracking-wide">vodafone</span>
               </div>
 
               {/* Intel */}
-              <div className="text-gray-400">
+              <div className="text-slate-400 hover:text-slate-500 transition-colors">
                 <SiIntel className="h-5 w-auto" />
               </div>
 
               {/* Tesla */}
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-slate-400 hover:text-slate-500 transition-colors">
                 <SiTesla className="w-5 h-5" />
                 <span className="text-base font-semibold tracking-widest uppercase">Tesla</span>
               </div>
 
               {/* AMD */}
-              <div className="flex items-center gap-2 text-gray-400">
+              <div className="flex items-center gap-2 text-slate-400 hover:text-slate-500 transition-colors">
                 <SiAmd className="w-5 h-5" />
                 <span className="text-base font-bold tracking-wider">AMD</span>
               </div>
 
               {/* Talkit */}
-              <div className="text-gray-400">
+              <div className="text-slate-400 hover:text-slate-500 transition-colors">
                 <span
                   className="text-base font-semibold tracking-wide"
                   style={{ fontFamily: "Georgia, serif" }}
