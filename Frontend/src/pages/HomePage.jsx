@@ -38,7 +38,6 @@ const CATEGORY_ICONS = {
   ),
 };
 
-const HERO_IMAGE_URL = "/hero.png";
 
 export default function HomePage() {
   const navigate = useNavigate();
@@ -129,23 +128,72 @@ export default function HomePage() {
             </div>
           </div>
 
-          <div className="flex-1 relative hidden lg:flex justify-center items-end h-96">
-            <svg
-              className="absolute inset-0 w-full h-full"
-              viewBox="0 0 400 400"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <rect x="120" y="20" width="240" height="300" stroke="#c7d2fe" strokeWidth="1.2" transform="rotate(8 240 170)" />
-              <rect x="140" y="45" width="200" height="260" stroke="#c7d2fe" strokeWidth="1" transform="rotate(4 240 175)" />
-              <rect x="160" y="70" width="160" height="220" stroke="#dbeafe" strokeWidth="0.8" transform="rotate(1 240 180)" />
-            </svg>
-            <img
-              src={HERO_IMAGE_URL}
-              alt="Job seeker"
-              className="relative z-10 h-full object-contain object-bottom"
-              style={{ mixBlendMode: "multiply" }}
-            />
+          <div className="flex-1 hidden lg:block relative h-[430px]">
+            <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-white to-indigo-50 rounded-[2rem] border border-blue-100 shadow-sm" />
+            <div className="absolute -top-6 right-8 w-24 h-24 bg-primary/10 rounded-full blur-2xl" />
+            <div className="absolute bottom-8 left-6 w-32 h-32 bg-indigo-200/30 rounded-full blur-3xl" />
+
+            <div className="relative z-10 h-full p-8 flex items-center justify-center">
+              <div className="w-full max-w-md space-y-5">
+                <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-5">
+                  <div className="flex items-center justify-between mb-5">
+                    <div>
+                      <p className="text-xs font-semibold text-gray-400 uppercase tracking-wider">Talent Pipeline</p>
+                      <h3 className="text-xl font-bold text-dark mt-1">Hiring Dashboard</h3>
+                    </div>
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 text-primary flex items-center justify-center">
+                      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M9 17v-6a2 2 0 012-2h8M9 17H5a2 2 0 01-2-2V7a2 2 0 012-2h4m0 12h10a2 2 0 002-2v-3" />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div className="grid grid-cols-3 gap-3 mb-5">
+                    {[
+                      ["5k+", "Jobs"],
+                      ["320", "Companies"],
+                      ["24h", "Fast apply"],
+                    ].map(([value, label]) => (
+                      <div key={label} className="rounded-xl bg-gray-50 p-3 text-center">
+                        <p className="text-lg font-extrabold text-dark">{value}</p>
+                        <p className="text-[11px] text-gray-500 mt-1">{label}</p>
+                      </div>
+                    ))}
+                  </div>
+
+                  <div className="space-y-3">
+                    {[
+                      ["Senior Product Designer", "Remote • Full Time"],
+                      ["Frontend Engineer", "Dhaka • Hybrid"],
+                      ["Growth Marketer", "On-site • Part Time"],
+                    ].map(([title, meta]) => (
+                      <div key={title} className="flex items-center gap-3 rounded-xl border border-gray-100 p-3">
+                        <div className="w-10 h-10 rounded-lg bg-blue-50 flex items-center justify-center text-primary font-bold">
+                          {title.charAt(0)}
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-sm font-bold text-dark truncate">{title}</p>
+                          <p className="text-xs text-gray-500 mt-0.5">{meta}</p>
+                        </div>
+                        <span className="text-[10px] font-semibold text-green-600 bg-green-50 px-2 py-1 rounded-full">Open</span>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="ml-14 bg-dark text-white rounded-2xl shadow-lg p-5 flex items-center gap-4">
+                  <div className="w-12 h-12 rounded-full bg-white/10 flex items-center justify-center">
+                    <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.8} d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <div>
+                    <p className="font-bold">Trusted by top teams</p>
+                    <p className="text-sm text-white/60">Find, apply, and track jobs faster.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
 
